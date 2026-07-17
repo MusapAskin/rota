@@ -83,8 +83,15 @@
     letter-spacing:0.06em;
     text-transform:uppercase;
     transition:color .2s;
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--gold-bright);transition:width .25s ease;
   }
   nav.links a:hover{color:var(--cream-ink);}
+  nav.links a:hover::after{width:100%;}
   @media(max-width:900px){nav.links{display:none;}}
 
   .lang-toggle{
@@ -153,6 +160,26 @@
   }
   .btn-ghost:hover{border-color:var(--gold-bright);background:rgba(224,181,99,.08);}
 
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+  .service-grid .service-card:nth-child(1){transition-delay:0s;}
+  .service-grid .service-card:nth-child(2){transition-delay:.08s;}
+  .service-grid .service-card:nth-child(3){transition-delay:.16s;}
+  .service-grid .service-card:nth-child(4){transition-delay:.24s;}
+  .service-grid .service-card:nth-child(5){transition-delay:.32s;}
+  .service-grid .service-card:nth-child(6){transition-delay:.4s;}
+  .process-track .stop:nth-child(1){transition-delay:0s;}
+  .process-track .stop:nth-child(2){transition-delay:.1s;}
+  .process-track .stop:nth-child(3){transition-delay:.2s;}
+  .process-track .stop:nth-child(4){transition-delay:.3s;}
+  .process-track .stop:nth-child(5){transition-delay:.4s;}
+
+  /* ===== NAV SCROLL STATE ===== */
+  header.site-nav{transition:box-shadow .3s ease,background .3s ease;}
+  header.site-nav.scrolled{box-shadow:0 8px 24px -12px rgba(0,0,0,.5);}
+
   /* boarding pass signature element */
   .pass-card{
     background:var(--paper);
@@ -162,7 +189,27 @@
     position:relative;
     box-shadow:0 30px 60px -20px rgba(0,0,0,.55);
     transform:rotate(2deg);
+    transition:transform .35s ease,box-shadow .35s ease;
   }
+  .pass-card:hover{box-shadow:0 40px 70px -20px rgba(0,0,0,.6);}
+  .pass-card:hover{animation-play-state:paused;}
+  @keyframes passFloat{
+    0%,100%{transform:rotate(2deg) translateY(0);}
+    50%{transform:rotate(2deg) translateY(-8px);}
+  }
+
+  /* ===== HERO ENTRANCE ===== */
+  .hero-grid .eyebrow,.hero h1,.hero p.lead,.hero-ctas,.hero .pass-card{opacity:1;}
+  @media(prefers-reduced-motion:no-preference){
+    .hero-grid .eyebrow,.hero h1,.hero p.lead,.hero-ctas,.hero .pass-card{opacity:0;}
+    .hero-grid .eyebrow{animation:heroIn .7s ease .05s forwards;}
+    .hero h1{animation:heroIn .7s ease .15s forwards;}
+    .hero p.lead{animation:heroIn .7s ease .28s forwards;}
+    .hero-ctas{animation:heroIn .7s ease .4s forwards;}
+    .hero .pass-card{animation:heroFade .8s ease .3s forwards, passFloat 6s ease-in-out 1.1s infinite;}
+  }
+  @keyframes heroIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes heroFade{from{opacity:0;}to{opacity:1;}}
   .pass-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px dashed var(--line-light);padding-bottom:16px;margin-bottom:16px;}
   .pass-top .brand{font-family:'Fraunces',serif;font-weight:700;font-size:16px;line-height:1.2;max-width:150px;}
   .pass-top .brand .dot{color:var(--brick);}
@@ -219,12 +266,20 @@
   .service-card{
     background:var(--paper-alt);border:1px solid var(--line-light);border-radius:6px;
     padding:26px 22px;position:relative;
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px -18px rgba(36,27,16,.35);
+    border-color:var(--gold);
   }
   .seal{
     width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);
     display:flex;align-items:center;justify-content:center;margin-bottom:16px;
     color:var(--gold);font-family:'Fraunces',serif;font-weight:700;font-size:15px;
+    transition:background .3s ease,color .3s ease;
   }
+  .service-card:hover .seal{background:var(--gold);color:var(--paper-alt);}
   .service-card h3{font-size:18px;margin-bottom:8px;}
   .service-card p{margin:0;font-size:14.5px;color:#5b5142;}
 
@@ -246,7 +301,9 @@
     border:1.5px solid var(--gold-bright);color:var(--gold-bright);
     display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
     font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-bottom:18px;
+    transition:background .3s ease,color .3s ease,transform .3s ease;
   }
+  .stop:hover .marker{background:var(--gold-bright);color:var(--navy-deep);transform:scale(1.1);}
   @media(max-width:900px){.stop .marker{position:absolute;left:-19px;top:0;margin-bottom:0;}}
   .stop h3{font-size:16.5px;color:var(--cream-ink);margin-bottom:8px;}
   .stop p{font-size:14px;color:var(--ink-soft);margin:0;}
@@ -373,11 +430,11 @@
   <!-- ================= ABOUT ================= -->
   <section id="hakkimizda">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 class="i18n" data-tr="Kağıt işleriyle ben uğraşayım, sen hedefine odaklan." data-en="I'll handle the paperwork — you focus on the goal.">Kağıt işleriyle ben uğraşayım, sen hedefine odaklan.</h2>
       </div>
       <div class="about-grid no-photo">
-        <div class="about-copy">
+        <div class="about-copy reveal">
           <p class="i18n" data-tr="Türkiye'de bir üniversiteyi kazanmış olman, hikayenin sonu değil — bambaşka bir rotanın başlangıcı olabilir. Yıllardır öğrencilerin Alman üniversite sistemini anlamasına, doğru bölümü ve şehri seçmesine, denklik ve dil şartlarını netleştirmesine ve başvuru takvimini eksiksiz takip etmesine yardımcı oluyorum." data-en="Getting admitted in Turkey isn't the end of the story — it can be the start of an entirely different route. For years I've helped students understand the German university system, choose the right program and city, sort out recognition and language requirements, and stay on top of every application deadline.">Türkiye'de bir üniversiteyi kazanmış olman, hikayenin sonu değil — bambaşka bir rotanın başlangıcı olabilir. Yıllardır öğrencilerin Alman üniversite sistemini anlamasına, doğru bölümü ve şehri seçmesine, denklik ve dil şartlarını netleştirmesine ve başvuru takvimini eksiksiz takip etmesine yardımcı oluyorum.</p>
           <p class="i18n" data-tr="Her öğrenci farklı bir rotadan gidiyor. Bazıları dil kursuyla, bazıları doğrudan bölümle başlıyor. Süreci senin durumuna göre seninle birlikte kurarım — genel geçer bir şablon değil, sana özel bir plan." data-en="Every student travels a different route. Some start with a language course, others go straight into their program. I build the process around your specific situation — not a generic template, but a plan made for you.">Her öğrenci farklı bir rotadan gidiyor. Bazıları dil kursuyla, bazıları doğrudan bölümle başlıyor. Süreci senin durumuna göre seninle birlikte kurarım — genel geçer bir şablon değil, sana özel bir plan.</p>
         </div>
@@ -389,37 +446,37 @@
   <!-- ================= SERVICES ================= -->
   <section id="hizmetler" style="background:var(--paper-alt);">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="Hizmetler" data-en="Services">Hizmetler</span></div>
         <h2 class="i18n" data-tr="Baştan sona kapsamlı danışmanlık." data-en="End-to-end consultancy.">Baştan sona kapsamlı danışmanlık.</h2>
       </div>
       <div class="service-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">01</div>
           <h3 class="i18n" data-tr="Üniversite &amp; Bölüm Seçimi" data-en="University &amp; Program Selection">Üniversite &amp; Bölüm Seçimi</h3>
           <p class="i18n" data-tr="Hedeflerine, bütçene ve Türkiye'deki notlarına göre en uygun üniversite ve bölüm eşleşmesini birlikte belirlerim." data-en="Together we find the right university and program match based on your goals, budget, and academic record.">Hedeflerine, bütçene ve Türkiye'deki notlarına göre en uygun üniversite ve bölüm eşleşmesini birlikte belirlerim.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">02</div>
           <h3 class="i18n" data-tr="Denklik &amp; Evrak Danışmanlığı" data-en="Recognition &amp; Document Guidance">Denklik &amp; Evrak Danışmanlığı</h3>
           <p class="i18n" data-tr="uni-assist başvurusu, denklik değerlendirmesi ve gerekli tüm belgelerin hazırlanmasında adım adım rehberlik." data-en="Step-by-step guidance through uni-assist applications, credential evaluation, and preparing every required document.">uni-assist başvurusu, denklik değerlendirmesi ve gerekli tüm belgelerin hazırlanmasında adım adım rehberlik.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">03</div>
           <h3 class="i18n" data-tr="Dil &amp; Sınav Hazırlığı Yönlendirmesi" data-en="Language &amp; Exam Prep Guidance">Dil &amp; Sınav Hazırlığı Yönlendirmesi</h3>
           <p class="i18n" data-tr="Almanca veya İngilizce dil şartların ve gerekli sınavlar için doğru kaynaklara ve zaman planına yönlendirme." data-en="Guidance toward the right resources and timeline for your German or English language requirements and required exams.">Almanca veya İngilizce dil şartların ve gerekli sınavlar için doğru kaynaklara ve zaman planına yönlendirme.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">04</div>
           <h3 class="i18n" data-tr="Başvuru &amp; Vize Takibi" data-en="Application &amp; Visa Tracking">Başvuru &amp; Vize Takibi</h3>
           <p class="i18n" data-tr="Başvuru dönemlerini kaçırmaman için takvim takibi, kabul mektubundan sonra vize randevusu ve dosya sürecinde destek." data-en="Calendar tracking so you never miss an application window, plus support with visa appointments and paperwork after your offer letter.">Başvuru dönemlerini kaçırmaman için takvim takibi, kabul mektubundan sonra vize randevusu ve dosya sürecinde destek.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">05</div>
           <h3 class="i18n" data-tr="Almanya'da Yerleşim Desteği" data-en="Settling-in Support">Almanya'da Yerleşim Desteği</h3>
           <p class="i18n" data-tr="Konaklama, banka hesabı, oturma izni ve şehre alışma konularında uçuştan sonra da yanındayım." data-en="Support with housing, opening a bank account, residence permits, and settling into your new city after landing.">Konaklama, banka hesabı, oturma izni ve şehre alışma konularında uçuştan sonra da yanındayım.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="seal">06</div>
           <h3 class="i18n" data-tr="Kişiye Özel Yol Haritası" data-en="Personal Roadmap">Kişiye Özel Yol Haritası</h3>
           <p class="i18n" data-tr="Mevcut durumuna göre hazırlanan, tarihleri ve görevleri net bir şekilde gösteren kişisel takip planı." data-en="A personal tracking plan built around your current situation, with clear dates and tasks.">Mevcut durumuna göre hazırlanan, tarihleri ve görevleri net bir şekilde gösteren kişisel takip planı.</p>
@@ -432,32 +489,32 @@
   <!-- ================= PROCESS ================= -->
   <section id="surec" class="on-navy">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="Süreç" data-en="Process">Süreç</span></div>
         <h2 class="i18n" data-tr="Kalkıştan varışa, beş durak." data-en="From departure to arrival, five stops.">Kalkıştan varışa, beş durak.</h2>
       </div>
       <div class="process-track">
-        <div class="stop">
+        <div class="stop reveal">
           <div class="marker">01</div>
           <h3 class="i18n" data-tr="Ön Değerlendirme" data-en="Initial Assessment">Ön Değerlendirme</h3>
           <p class="i18n" data-tr="Mevcut durumunu, hedeflerini ve bütçeni seninle birlikte konuşurum." data-en="I talk through your current situation, goals, and budget with you.">Mevcut durumunu, hedeflerini ve bütçeni seninle birlikte konuşurum.</p>
         </div>
-        <div class="stop">
+        <div class="stop reveal">
           <div class="marker">02</div>
           <h3 class="i18n" data-tr="Üniversite Planı" data-en="University Plan">Üniversite Planı</h3>
           <p class="i18n" data-tr="Sana uygun üniversite, bölüm ve şehir seçeneklerini netleştiririm." data-en="I narrow down the right university, program, and city options for you.">Sana uygun üniversite, bölüm ve şehir seçeneklerini netleştiririm.</p>
         </div>
-        <div class="stop">
+        <div class="stop reveal">
           <div class="marker">03</div>
           <h3 class="i18n" data-tr="Evrak Hazırlığı" data-en="Document Prep">Evrak Hazırlığı</h3>
           <p class="i18n" data-tr="Denklik, dil belgesi ve başvuru evraklarını eksiksiz hazırlarım." data-en="I prepare your recognition, language certificates, and application documents completely.">Denklik, dil belgesi ve başvuru evraklarını eksiksiz hazırlarım.</p>
         </div>
-        <div class="stop">
+        <div class="stop reveal">
           <div class="marker">04</div>
           <h3 class="i18n" data-tr="Başvuru &amp; Takip" data-en="Application &amp; Follow-up">Başvuru &amp; Takip</h3>
           <p class="i18n" data-tr="Başvurunu gönderir, sonucu senin adına takip ederim." data-en="I submit your application and track the result on your behalf.">Başvurunu gönderir, sonucu senin adına takip ederim.</p>
         </div>
-        <div class="stop">
+        <div class="stop reveal">
           <div class="marker">05</div>
           <h3 class="i18n" data-tr="Vize &amp; Kalkış" data-en="Visa &amp; Departure">Vize &amp; Kalkış</h3>
           <p class="i18n" data-tr="Vize randevusu, konaklama ve yerleşim hazırlıklarıyla uçuşuna hazırlanıyorsun." data-en="You prepare for your flight with visa appointments, housing, and settling-in support.">Vize randevusu, konaklama ve yerleşim hazırlıklarıyla uçuşuna hazırlanıyorsun.</p>
@@ -474,7 +531,7 @@
         <h3 class="i18n" data-tr="Rotanı birlikte çizelim." data-en="Let's map your route together.">Rotanı birlikte çizelim.</h3>
         <p class="i18n" data-tr="Formu doldur, 24 saat içinde ücretsiz ön görüşme için seninle iletişime geçeyim." data-en="Fill out the form and I'll reach out within 24 hours to arrange your free initial consultation.">Formu doldur, 24 saat içinde ücretsiz ön görüşme için seninle iletişime geçeyim.</p>
       </div>
-      <form class="entry-form" id="contact-form" action="https://formspree.io/rota.deutschland@gmail.com" method="POST">
+      <form class="entry-form reveal" id="contact-form" action="https://formspree.io/rota.deutschland@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="ROTA ALMANYA — Yeni İletişim Formu Mesajı">
         <div class="form-row">
           <div class="field">
@@ -535,6 +592,30 @@
 
   btnTr.addEventListener('click', ()=>setLang('tr'));
   btnEn.addEventListener('click', ()=>setLang('en'));
+
+  // Scroll-reveal animation for content blocks
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el=>revealObserver.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in-view'));
+  }
+
+  // Nav bar shadow once the page is scrolled
+  const siteNav = document.querySelector('header.site-nav');
+  const updateNavShadow = ()=>{
+    siteNav.classList.toggle('scrolled', window.scrollY > 12);
+  };
+  window.addEventListener('scroll', updateNavShadow, {passive:true});
+  updateNavShadow();
 </script>
 
 </body>
