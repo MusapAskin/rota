@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROTA ALMANYA — Türkiye'den Almanya'ya Üniversite Danışmanlığı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A41;
+    --navy-deep:#131F30;
+    --paper:#F4EEE1;
+    --paper-alt:#EDE4D0;
+    --ink:#241B10;
+    --cream-ink:#F4EEE1;
+    --ink-soft:#B9AE93;
+    --gold:#C99A44;
+    --gold-bright:#E0B563;
+    --brick:#B04E38;
+    --sage:#6E7F5C;
+    --line-dark:rgba(244,238,225,0.18);
+    --line-light:rgba(36,27,16,0.14);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ===== NAV ===== */
+  header.site-nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--navy);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav-inner{
+    max-width:1120px;margin:0 auto;padding:0 32px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  @media(max-width:640px){.nav-inner{padding:0 20px;height:64px;}}
+  .logo{
+    color:var(--cream-ink);
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:0.02em;
+    display:flex;align-items:center;gap:8px;
+    text-decoration:none;
+  }
+  .logo .dot{color:var(--gold-bright);}
+  nav.links{display:flex;gap:28px;align-items:center;}
+  nav.links a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:13.5px;
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    transition:color .2s;
+  }
+  nav.links a:hover{color:var(--cream-ink);}
+  @media(max-width:900px){nav.links{display:none;}}
+
+  .lang-toggle{
+    display:flex;border:1px solid var(--line-dark);border-radius:20px;overflow:hidden;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+  }
+  .lang-toggle button{
+    background:transparent;border:none;color:var(--ink-soft);
+    padding:7px 14px;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;
+    transition:background .2s,color .2s;
+  }
+  .lang-toggle button.active{background:var(--gold);color:var(--navy-deep);font-weight:600;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .btn-nav-cta{
+    background:var(--brick);color:var(--cream-ink);
+    padding:9px 18px;border-radius:20px;text-decoration:none;
+    font-size:13px;font-weight:600;white-space:nowrap;
+    font-family:'Inter',sans-serif;
+  }
+  @media(max-width:640px){.btn-nav-cta{display:none;}}
+
+  /* ===== PERFORATION DIVIDER ===== */
+  .perf{
+    height:18px;width:100%;
+    background-image: radial-gradient(circle 5px, var(--paper) 5px, transparent 5.5px);
+    background-size:24px 24px;
+    background-position:center;
+    margin-top:-9px;position:relative;z-index:2;
+  }
+  .perf.on-navy{background-image: radial-gradient(circle 5px, var(--navy) 5px, transparent 5.5px);}
+  .perf.on-paper-alt{background-image: radial-gradient(circle 5px, var(--paper-alt) 5px, transparent 5.5px);}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--navy);
+    color:var(--cream-ink);
+    padding:76px 0 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:48px;}}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
+    color:var(--gold-bright);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow .rule{width:32px;height:1px;background:var(--gold-bright);display:inline-block;}
+  .hero h1{font-size:clamp(34px,4.6vw,54px);color:var(--cream-ink);}
+  .hero h1 em{font-style:normal;color:var(--gold-bright);}
+  .hero p.lead{
+    margin-top:22px;font-size:17.5px;color:var(--ink-soft);max-width:46ch;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold);color:var(--navy-deep);padding:14px 26px;border-radius:26px;
+    text-decoration:none;font-weight:700;font-size:15px;transition:transform .15s, background .2s;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--gold-bright);transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid var(--line-dark);color:var(--cream-ink);padding:14px 26px;border-radius:26px;
+    text-decoration:none;font-weight:600;font-size:15px;transition:border-color .2s,background .2s;
+    display:inline-block;
+  }
+  .btn-ghost:hover{border-color:var(--gold-bright);background:rgba(224,181,99,.08);}
+
+  /* boarding pass signature element */
+  .pass-card{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:10px;
+    padding:26px 26px 22px;
+    position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.55);
+    transform:rotate(2deg);
+  }
+  .pass-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px dashed var(--line-light);padding-bottom:16px;margin-bottom:16px;}
+  .pass-top .brand{font-family:'Fraunces',serif;font-weight:700;font-size:16px;line-height:1.2;max-width:150px;}
+  .pass-top .brand .dot{color:var(--brick);}
+  .pass-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);text-align:right;letter-spacing:.06em;}
+  .route-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .route-city{font-family:'Fraunces',serif;font-weight:600;font-size:26px;}
+  .route-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+  .route-line{flex:1;position:relative;height:20px;display:flex;align-items:center;}
+  .route-line svg{width:100%;height:20px;overflow:visible;}
+  .route-dash{stroke:var(--brick);stroke-width:2;stroke-dasharray:5 6;fill:none;}
+  @media(prefers-reduced-motion:no-preference){
+    .route-dash{animation:dashmove 1.8s linear infinite;}
+  }
+  @keyframes dashmove{to{stroke-dashoffset:-22;}}
+  .pass-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 18px;}
+  .pass-fields div{border-top:1px solid var(--line-light);padding-top:8px;}
+  .pass-fields .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;}
+  .pass-fields .v{font-family:'Fraunces',serif;font-weight:600;font-size:15px;}
+  .pass-stamp{
+    position:absolute;top:-14px;right:-10px;
+    width:74px;height:74px;border-radius:50%;
+    border:2px solid var(--sage);color:var(--sage);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.05em;text-transform:uppercase;
+    transform:rotate(-14deg);
+    background:rgba(110,127,92,0.06);
+    line-height:1.3;
+  }
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:84px 0;}
+  @media(max-width:640px){section{padding:60px 0;}}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head .eyebrow{color:var(--brick);}
+  .section-head .eyebrow .rule{background:var(--brick);}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
+  .section-head p{margin-top:14px;color:#5b5142;font-size:16.5px;max-width:52ch;}
+
+  section.on-navy{background:var(--navy);color:var(--cream-ink);}
+  section.on-navy .section-head .eyebrow{color:var(--gold-bright);}
+  section.on-navy .section-head .eyebrow .rule{background:var(--gold-bright);}
+  section.on-navy .section-head p{color:var(--ink-soft);}
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start;}
+  @media(max-width:840px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid.no-photo{grid-template-columns:1fr;max-width:760px;}
+  .about-copy p{margin:0 0 16px;font-size:16.5px;color:#4a4234;}
+
+  /* ===== SERVICES ===== */
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--paper-alt);border:1px solid var(--line-light);border-radius:6px;
+    padding:26px 22px;position:relative;
+  }
+  .seal{
+    width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+    color:var(--gold);font-family:'Fraunces',serif;font-weight:700;font-size:15px;
+  }
+  .service-card h3{font-size:18px;margin-bottom:8px;}
+  .service-card p{margin:0;font-size:14.5px;color:#5b5142;}
+
+  /* ===== PROCESS ===== */
+  .process-track{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;
+  }
+  @media(max-width:900px){.process-track{grid-template-columns:1fr;gap:0;}}
+  .process-track::before{
+    content:"";position:absolute;top:19px;left:0;right:0;height:1px;
+    background-image:repeating-linear-gradient(90deg,var(--line-dark) 0 8px, transparent 8px 16px);
+  }
+  @media(max-width:900px){.process-track::before{display:none;}}
+  .stop{padding:0 16px 0 0;position:relative;}
+  @media(max-width:900px){.stop{padding:0 0 28px 34px;border-left:1px dashed var(--line-dark);margin-left:6px;}
+    .stop:last-child{border-left:1px dashed transparent;padding-bottom:0;}}
+  .stop .marker{
+    width:38px;height:38px;border-radius:50%;background:var(--navy);
+    border:1.5px solid var(--gold-bright);color:var(--gold-bright);
+    display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;margin-bottom:18px;
+  }
+  @media(max-width:900px){.stop .marker{position:absolute;left:-19px;top:0;margin-bottom:0;}}
+  .stop h3{font-size:16.5px;color:var(--cream-ink);margin-bottom:8px;}
+  .stop p{font-size:14px;color:var(--ink-soft);margin:0;}
+
+  /* ===== CONTACT ===== */
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:52px;align-items:start;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info h3{color:var(--cream-ink);font-size:20px;margin-bottom:14px;}
+  .contact-info p{color:var(--ink-soft);font-size:15.5px;margin:0 0 22px;}
+
+  .entry-form{
+    background:var(--paper);border-radius:8px;padding:32px;
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.5);
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
+  .field label{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:#8a7f68;margin-bottom:6px;
+  }
+  .field input,.field textarea{
+    width:100%;border:none;border-bottom:1.5px solid var(--line-light);background:transparent;
+    padding:9px 2px;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);
+    outline:none;transition:border-color .2s;
+  }
+  .field input:focus,.field textarea:focus{border-color:var(--brick);}
+  .field{margin-bottom:16px;}
+  .field textarea{resize:vertical;min-height:80px;}
+  .btn-submit{
+    margin-top:8px;width:100%;background:var(--brick);color:var(--cream-ink);border:none;
+    padding:15px;border-radius:26px;font-weight:700;font-size:15px;cursor:pointer;font-family:'Inter',sans-serif;
+    transition:background .2s;
+  }
+  .btn-submit:hover{background:#9a4230;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy-deep);color:var(--ink-soft);padding:40px 0;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-inner .logo{font-size:18px;}
+  .footer-inner p{font-family:'IBM Plex Mono',monospace;font-size:12px;margin:0;}
+
+  :focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">ROTA <span class="dot">ALMANYA</span></a>
+    <nav class="links">
+      <a href="#hakkimizda" class="i18n" data-tr="Hakkımızda" data-en="About">Hakkımızda</a>
+      <a href="#hizmetler" class="i18n" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+      <a href="#surec" class="i18n" data-tr="Süreç" data-en="Process">Süreç</a>
+      <a href="#iletisim" class="i18n" data-tr="İletişim" data-en="Contact">İletişim</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button type="button" id="btn-tr" class="active">TR</button>
+        <button type="button" id="btn-en">EN</button>
+      </div>
+      <a href="#iletisim" class="btn-nav-cta i18n" data-tr="İletişime Geç" data-en="Get in Touch">İletişime Geç</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="Türkiye → Almanya" data-en="Turkey → Germany">Türkiye → Almanya</span></div>
+        <h1 class="i18n" data-tr="Türkiye'de kazandın,<br><em>Almanya'da devam et.</em>" data-en="Admitted in Turkey.<br><em>Continue in Germany.</em>">Türkiye'de kazandın,<br><em>Almanya'da devam et.</em></h1>
+        <p class="lead i18n" data-tr="Türkiye'deki üniversite yerleştirme sonucunla, hayalindeki Alman üniversitesine geçiş yapman için başvurudan vizeye kadar tüm süreçte yanındayım." data-en="With your Turkish university placement result in hand, I guide you through every step — from application to visa — into the German university you've been dreaming of.">Türkiye'deki üniversite yerleştirme sonucunla, hayalindeki Alman üniversitesine geçiş yapman için başvurudan vizeye kadar tüm süreçte yanındayım.</p>
+        <div class="hero-ctas">
+          <a href="#iletisim" class="btn-primary i18n" data-tr="Ücretsiz Ön Görüşme Al" data-en="Book a Free Consultation">Ücretsiz Ön Görüşme Al</a>
+          <a href="#surec" class="btn-ghost i18n" data-tr="Süreci İncele" data-en="See the Process">Süreci İncele</a>
+        </div>
+      </div>
+      <div>
+        <div class="pass-card">
+          <div class="pass-stamp">
+            <span class="i18n" data-tr="Onaylandı" data-en="Approved">Onaylandı</span>
+          </div>
+          <div class="pass-top">
+            <div class="brand">ROTA <span class="dot">ALMANYA</span></div>
+            <div class="pass-code i18n" data-tr="BAŞVURU NO<br>RT-2026-0417" data-en="APPLICATION NO<br>RT-2026-0417">BAŞVURU NO<br>RT-2026-0417</div>
+          </div>
+          <div class="route-row">
+            <div>
+              <div class="route-city">IST</div>
+              <div class="route-sub i18n" data-tr="İstanbul, TR" data-en="Istanbul, TR">İstanbul, TR</div>
+            </div>
+            <div class="route-line">
+              <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+                <path class="route-dash" d="M0,10 L100,10"/>
+              </svg>
+            </div>
+            <div>
+              <div class="route-city">FRA</div>
+              <div class="route-sub i18n" data-tr="Frankfurt, DE" data-en="Frankfurt, DE">Frankfurt, DE</div>
+            </div>
+          </div>
+          <div class="pass-fields">
+            <div>
+              <span class="k i18n" data-tr="Bölüm" data-en="Program">Bölüm</span>
+              <span class="v i18n" data-tr="Makine Müh." data-en="Mech. Eng.">Makine Müh.</span>
+            </div>
+            <div>
+              <span class="k i18n" data-tr="Dönem" data-en="Intake">Dönem</span>
+              <span class="v i18n" data-tr="Kış 2026" data-en="Winter 2026">Kış 2026</span>
+            </div>
+            <div>
+              <span class="k i18n" data-tr="Durum" data-en="Status">Durum</span>
+              <span class="v" style="color:var(--sage);">✓ <span class="i18n" data-tr="Yolda" data-en="On Track">Yolda</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="perf on-navy"></div>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="hakkimizda">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="i18n" data-tr="Kağıt işleriyle ben uğraşayım, sen hedefine odaklan." data-en="I'll handle the paperwork — you focus on the goal.">Kağıt işleriyle ben uğraşayım, sen hedefine odaklan.</h2>
+      </div>
+      <div class="about-grid no-photo">
+        <div class="about-copy">
+          <p class="i18n" data-tr="Türkiye'de bir üniversiteyi kazanmış olman, hikayenin sonu değil — bambaşka bir rotanın başlangıcı olabilir. Yıllardır öğrencilerin Alman üniversite sistemini anlamasına, doğru bölümü ve şehri seçmesine, denklik ve dil şartlarını netleştirmesine ve başvuru takvimini eksiksiz takip etmesine yardımcı oluyorum." data-en="Getting admitted in Turkey isn't the end of the story — it can be the start of an entirely different route. For years I've helped students understand the German university system, choose the right program and city, sort out recognition and language requirements, and stay on top of every application deadline.">Türkiye'de bir üniversiteyi kazanmış olman, hikayenin sonu değil — bambaşka bir rotanın başlangıcı olabilir. Yıllardır öğrencilerin Alman üniversite sistemini anlamasına, doğru bölümü ve şehri seçmesine, denklik ve dil şartlarını netleştirmesine ve başvuru takvimini eksiksiz takip etmesine yardımcı oluyorum.</p>
+          <p class="i18n" data-tr="Her öğrenci farklı bir rotadan gidiyor. Bazıları dil kursuyla, bazıları doğrudan bölümle başlıyor. Süreci senin durumuna göre seninle birlikte kurarım — genel geçer bir şablon değil, sana özel bir plan." data-en="Every student travels a different route. Some start with a language course, others go straight into their program. I build the process around your specific situation — not a generic template, but a plan made for you.">Her öğrenci farklı bir rotadan gidiyor. Bazıları dil kursuyla, bazıları doğrudan bölümle başlıyor. Süreci senin durumuna göre seninle birlikte kurarım — genel geçer bir şablon değil, sana özel bir plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="perf on-paper-alt"></div>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="hizmetler" style="background:var(--paper-alt);">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="Hizmetler" data-en="Services">Hizmetler</span></div>
+        <h2 class="i18n" data-tr="Baştan sona kapsamlı danışmanlık." data-en="End-to-end consultancy.">Baştan sona kapsamlı danışmanlık.</h2>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="seal">01</div>
+          <h3 class="i18n" data-tr="Üniversite &amp; Bölüm Seçimi" data-en="University &amp; Program Selection">Üniversite &amp; Bölüm Seçimi</h3>
+          <p class="i18n" data-tr="Hedeflerine, bütçene ve Türkiye'deki notlarına göre en uygun üniversite ve bölüm eşleşmesini birlikte belirlerim." data-en="Together we find the right university and program match based on your goals, budget, and academic record.">Hedeflerine, bütçene ve Türkiye'deki notlarına göre en uygun üniversite ve bölüm eşleşmesini birlikte belirlerim.</p>
+        </div>
+        <div class="service-card">
+          <div class="seal">02</div>
+          <h3 class="i18n" data-tr="Denklik &amp; Evrak Danışmanlığı" data-en="Recognition &amp; Document Guidance">Denklik &amp; Evrak Danışmanlığı</h3>
+          <p class="i18n" data-tr="uni-assist başvurusu, denklik değerlendirmesi ve gerekli tüm belgelerin hazırlanmasında adım adım rehberlik." data-en="Step-by-step guidance through uni-assist applications, credential evaluation, and preparing every required document.">uni-assist başvurusu, denklik değerlendirmesi ve gerekli tüm belgelerin hazırlanmasında adım adım rehberlik.</p>
+        </div>
+        <div class="service-card">
+          <div class="seal">03</div>
+          <h3 class="i18n" data-tr="Dil &amp; Sınav Hazırlığı Yönlendirmesi" data-en="Language &amp; Exam Prep Guidance">Dil &amp; Sınav Hazırlığı Yönlendirmesi</h3>
+          <p class="i18n" data-tr="Almanca veya İngilizce dil şartların ve gerekli sınavlar için doğru kaynaklara ve zaman planına yönlendirme." data-en="Guidance toward the right resources and timeline for your German or English language requirements and required exams.">Almanca veya İngilizce dil şartların ve gerekli sınavlar için doğru kaynaklara ve zaman planına yönlendirme.</p>
+        </div>
+        <div class="service-card">
+          <div class="seal">04</div>
+          <h3 class="i18n" data-tr="Başvuru &amp; Vize Takibi" data-en="Application &amp; Visa Tracking">Başvuru &amp; Vize Takibi</h3>
+          <p class="i18n" data-tr="Başvuru dönemlerini kaçırmaman için takvim takibi, kabul mektubundan sonra vize randevusu ve dosya sürecinde destek." data-en="Calendar tracking so you never miss an application window, plus support with visa appointments and paperwork after your offer letter.">Başvuru dönemlerini kaçırmaman için takvim takibi, kabul mektubundan sonra vize randevusu ve dosya sürecinde destek.</p>
+        </div>
+        <div class="service-card">
+          <div class="seal">05</div>
+          <h3 class="i18n" data-tr="Almanya'da Yerleşim Desteği" data-en="Settling-in Support">Almanya'da Yerleşim Desteği</h3>
+          <p class="i18n" data-tr="Konaklama, banka hesabı, oturma izni ve şehre alışma konularında uçuştan sonra da yanındayım." data-en="Support with housing, opening a bank account, residence permits, and settling into your new city after landing.">Konaklama, banka hesabı, oturma izni ve şehre alışma konularında uçuştan sonra da yanındayım.</p>
+        </div>
+        <div class="service-card">
+          <div class="seal">06</div>
+          <h3 class="i18n" data-tr="Kişiye Özel Yol Haritası" data-en="Personal Roadmap">Kişiye Özel Yol Haritası</h3>
+          <p class="i18n" data-tr="Mevcut durumuna göre hazırlanan, tarihleri ve görevleri net bir şekilde gösteren kişisel takip planı." data-en="A personal tracking plan built around your current situation, with clear dates and tasks.">Mevcut durumuna göre hazırlanan, tarihleri ve görevleri net bir şekilde gösteren kişisel takip planı.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="perf on-navy"></div>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="surec" class="on-navy">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="Süreç" data-en="Process">Süreç</span></div>
+        <h2 class="i18n" data-tr="Kalkıştan varışa, beş durak." data-en="From departure to arrival, five stops.">Kalkıştan varışa, beş durak.</h2>
+      </div>
+      <div class="process-track">
+        <div class="stop">
+          <div class="marker">01</div>
+          <h3 class="i18n" data-tr="Ön Değerlendirme" data-en="Initial Assessment">Ön Değerlendirme</h3>
+          <p class="i18n" data-tr="Mevcut durumunu, hedeflerini ve bütçeni seninle birlikte konuşurum." data-en="I talk through your current situation, goals, and budget with you.">Mevcut durumunu, hedeflerini ve bütçeni seninle birlikte konuşurum.</p>
+        </div>
+        <div class="stop">
+          <div class="marker">02</div>
+          <h3 class="i18n" data-tr="Üniversite Planı" data-en="University Plan">Üniversite Planı</h3>
+          <p class="i18n" data-tr="Sana uygun üniversite, bölüm ve şehir seçeneklerini netleştiririm." data-en="I narrow down the right university, program, and city options for you.">Sana uygun üniversite, bölüm ve şehir seçeneklerini netleştiririm.</p>
+        </div>
+        <div class="stop">
+          <div class="marker">03</div>
+          <h3 class="i18n" data-tr="Evrak Hazırlığı" data-en="Document Prep">Evrak Hazırlığı</h3>
+          <p class="i18n" data-tr="Denklik, dil belgesi ve başvuru evraklarını eksiksiz hazırlarım." data-en="I prepare your recognition, language certificates, and application documents completely.">Denklik, dil belgesi ve başvuru evraklarını eksiksiz hazırlarım.</p>
+        </div>
+        <div class="stop">
+          <div class="marker">04</div>
+          <h3 class="i18n" data-tr="Başvuru &amp; Takip" data-en="Application &amp; Follow-up">Başvuru &amp; Takip</h3>
+          <p class="i18n" data-tr="Başvurunu gönderir, sonucu senin adına takip ederim." data-en="I submit your application and track the result on your behalf.">Başvurunu gönderir, sonucu senin adına takip ederim.</p>
+        </div>
+        <div class="stop">
+          <div class="marker">05</div>
+          <h3 class="i18n" data-tr="Vize &amp; Kalkış" data-en="Visa &amp; Departure">Vize &amp; Kalkış</h3>
+          <p class="i18n" data-tr="Vize randevusu, konaklama ve yerleşim hazırlıklarıyla uçuşuna hazırlanıyorsun." data-en="You prepare for your flight with visa appointments, housing, and settling-in support.">Vize randevusu, konaklama ve yerleşim hazırlıklarıyla uçuşuna hazırlanıyorsun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="iletisim" class="on-navy">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <div class="eyebrow"><span class="rule"></span><span class="i18n" data-tr="İletişim" data-en="Contact">İletişim</span></div>
+        <h3 class="i18n" data-tr="Rotanı birlikte çizelim." data-en="Let's map your route together.">Rotanı birlikte çizelim.</h3>
+        <p class="i18n" data-tr="Formu doldur, 24 saat içinde ücretsiz ön görüşme için seninle iletişime geçeyim." data-en="Fill out the form and I'll reach out within 24 hours to arrange your free initial consultation.">Formu doldur, 24 saat içinde ücretsiz ön görüşme için seninle iletişime geçeyim.</p>
+      </div>
+      <form class="entry-form" id="contact-form" action="https://formspree.io/rota.deutschland@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="ROTA ALMANYA — Yeni İletişim Formu Mesajı">
+        <div class="form-row">
+          <div class="field">
+            <label class="i18n" data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
+            <input type="text" name="Ad Soyad" required>
+          </div>
+          <div class="field">
+            <label class="i18n" data-tr="E-posta" data-en="Email">E-posta</label>
+            <input type="email" name="E-posta" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label class="i18n" data-tr="Telefon" data-en="Phone">Telefon</label>
+            <input type="tel" name="Telefon">
+          </div>
+          <div class="field">
+            <label class="i18n" data-tr="Dil Bilgisi" data-en="Language Proficiency">Dil Bilgisi</label>
+            <input type="text" name="Dil Bilgisi" placeholder="Almanca B1, İngilizce B2 vb.">
+          </div>
+        </div>
+        <div class="field">
+          <label class="i18n" data-tr="Kazandığın Üniversite / Bölüm" data-en="Your Current University / Program">Kazandığın Üniversite / Bölüm</label>
+          <input type="text" name="Kazandığı Üniversite / Bölüm" required>
+        </div>
+        <div class="field">
+          <label class="i18n" data-tr="Mesajın" data-en="Your Message">Mesajın</label>
+          <textarea name="Mesaj"></textarea>
+        </div>
+        <button type="submit" class="btn-submit i18n" data-tr="Gönder" data-en="Send">Gönder</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#top" class="logo">ROTA <span class="dot">ALMANYA</span></a>
+    <p class="i18n" data-tr="© 2026 ROTA ALMANYA. Tüm hakları saklıdır." data-en="© 2026 ROTA ALMANYA. All rights reserved.">© 2026 ROTA ALMANYA. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<script>
+  const btnTr = document.getElementById('btn-tr');
+  const btnEn = document.getElementById('btn-en');
+  const els = document.querySelectorAll('.i18n');
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    els.forEach(el=>{
+      const val = el.getAttribute('data-'+lang);
+      if(val !== null) el.innerHTML = val;
+    });
+    btnTr.classList.toggle('active', lang==='tr');
+    btnEn.classList.toggle('active', lang==='en');
+  }
+
+  btnTr.addEventListener('click', ()=>setLang('tr'));
+  btnEn.addEventListener('click', ()=>setLang('en'));
+</script>
+
+</body>
+</html>
