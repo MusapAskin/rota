@@ -546,7 +546,7 @@
         <div class="form-row">
           <div class="field">
             <label class="i18n" data-tr="Telefon" data-en="Phone">Telefon</label>
-            <input type="tel" name="Telefon">
+            <input type="tel" name="Telefon" inputmode="tel" pattern="^[0-9+()\s-]{10,17}$" placeholder="0 5XX XXX XX XX" title="Lütfen geçerli bir telefon numarası girin (yalnızca rakam, boşluk, + ( ) - karakterleri)">
           </div>
           <div class="field">
             <label class="i18n" data-tr="Dil Bilgisi" data-en="Language Proficiency">Dil Bilgisi</label>
