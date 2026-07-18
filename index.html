@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROTA ALMANYA — Türkiye'den Almanya'ya Üniversite Danışmanlığı</title>
+<meta name="description" content="Türkiye'de üniversite kazandın, Almanya'da devam et. Üniversite ve bölüm seçimi, denklik, dil şartları, başvuru ve vize sürecinde baştan sona kişisel danışmanlık.">
+<meta property="og:title" content="ROTA ALMANYA — Türkiye'den Almanya'ya Üniversite Danışmanlığı">
+<meta property="og:description" content="Türkiye'de üniversite kazandın, Almanya'da devam et. Başvuru, denklik ve vize sürecinde baştan sona yanındayım.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%231B2A41'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='60' font-weight='700' fill='%23E0B563' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -93,6 +100,36 @@
   nav.links a:hover{color:var(--cream-ink);}
   nav.links a:hover::after{width:100%;}
   @media(max-width:900px){nav.links{display:none;}}
+
+  /* ===== MOBILE MENU ===== */
+  .hamburger{
+    display:none;
+    flex-direction:column;justify-content:center;gap:5px;
+    width:32px;height:32px;background:none;border:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{
+    display:block;width:100%;height:2px;background:var(--cream-ink);
+    transition:transform .3s ease,opacity .3s ease;
+  }
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media(max-width:900px){.hamburger{display:flex;}}
+
+  nav.mobile-links{
+    display:none;flex-direction:column;
+    background:var(--navy);border-top:1px solid var(--line-dark);
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+  }
+  nav.mobile-links.open{max-height:320px;}
+  @media(max-width:900px){nav.mobile-links{display:flex;}}
+  nav.mobile-links a{
+    color:var(--ink-soft);text-decoration:none;
+    padding:16px 32px;border-bottom:1px solid var(--line-dark);
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+  }
+  nav.mobile-links a:active,nav.mobile-links a:hover{color:var(--cream-ink);background:rgba(224,181,99,.06);}
+  @media(max-width:640px){nav.mobile-links a{padding:14px 20px;}}
 
   .lang-toggle{
     display:flex;border:1px solid var(--line-dark);border-radius:20px;overflow:hidden;
@@ -365,8 +402,17 @@
         <button type="button" id="btn-en">EN</button>
       </div>
       <a href="#iletisim" class="btn-nav-cta i18n" data-tr="İletişime Geç" data-en="Get in Touch">İletişime Geç</a>
+      <button type="button" class="hamburger" id="hamburger-btn" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-links" id="mobile-links">
+    <a href="#hakkimizda" class="i18n" data-tr="Hakkımızda" data-en="About">Hakkımızda</a>
+    <a href="#hizmetler" class="i18n" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+    <a href="#surec" class="i18n" data-tr="Süreç" data-en="Process">Süreç</a>
+    <a href="#iletisim" class="i18n" data-tr="İletişim" data-en="Contact">İletişim</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -616,6 +662,23 @@
   };
   window.addEventListener('scroll', updateNavShadow, {passive:true});
   updateNavShadow();
+
+  // Mobile hamburger menu
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileLinks = document.getElementById('mobile-links');
+  hamburgerBtn.addEventListener('click', ()=>{
+    const isOpen = mobileLinks.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    hamburgerBtn.setAttribute('aria-label', isOpen ? 'Menüyü kapat' : 'Menüyü aç');
+  });
+  mobileLinks.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      mobileLinks.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>
